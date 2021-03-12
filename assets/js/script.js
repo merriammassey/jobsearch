@@ -5,13 +5,28 @@ var careerApi = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/web
 
 // variables for job listings
 var jobName = "web developer"
-var jobLocation = "phoenix az"
+//var jobLocation = "phoenix az"
 
 var getJobDetails = function() {
+  //variables for job details -  make plural and add url encoding to variables above for this api
+  var encodedJobName = encodeURIComponent(jobName + "s");
+  var jobLocation = "85268";
+  
+  //if there is a correctly entered job location, use it in the api request
+  
+  if(jobLocation){
+    var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + encodedJobName + "/" + jobLocation + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";     
+  // if there is no job location 
+  } else {
+    alert("error: Please enter either city, state (Chicago, IL), state (IL), or ZIP code (61299). With city, state, you must use a comma."); 
+  }
+
   //variables for job details - need to add url encoding to variables above
   var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + jobName + "/" + jobLocation + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";     
   fetch(careerUrl, headers).then(function(response) {
 
+
+  fetch(careerUrl, headers).then(function(response) {
   //fetch(careerApi, headers).then(function(response) {
     if (response.ok) {
       response.json().then(function(data) {
@@ -23,7 +38,10 @@ var getJobDetails = function() {
       document.querySelector("#mediansalary-container").innerHTML = "Median salary: $" + parseFloat(data.OccupationDetail[0].Wages.StateWagesList[0].Median).toLocaleString("en");
       document.querySelector("#salaryrange-container").innerHTML = "Salary range: $" + parseFloat(data.OccupationDetail[0].Wages.StateWagesList[0].Pct10).toLocaleString("en") + "-$" + parseFloat(data.OccupationDetail[0].Wages.StateWagesList[0].Pct90).toLocaleString("en");
       });
-    };  
+    } 
+    else {
+      alert("error: Please enter either city, state (Chicago, IL), state (IL), or ZIP code (61299). With city, state, you must use a comma."); 
+    } 
   });
 };
   
