@@ -6,7 +6,6 @@ var jobSearch = document.querySelector("#job-search");
 var locationSearch = document.querySelector("#location-search");
 var testContainer = document.querySelector("#test-job-container");
 
-
 var getJobDetails = function() {
   //variables for job details -  make plural and add url encoding to variables above for this api
   var jobName = jobSearch.value;
@@ -23,9 +22,7 @@ var getJobDetails = function() {
   }
 
   //variables for job details - need to add url encoding to variables above
-  var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + jobName + "/" + jobLocation + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";     
-  fetch(careerUrl, headers).then(function(response) {
-
+  var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + jobName + "/" + jobLocation + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";
 
   fetch(careerUrl, headers).then(function(response) {
   //fetch(careerApi, headers).then(function(response) {
@@ -43,8 +40,8 @@ var getJobDetails = function() {
     else {
       alert("error: Please enter either city, state (Chicago, IL), state (IL), or ZIP code (61299). With city, state, you must use a comma."); 
     } 
+
   });
-});
 };
 
 //search Google for parameters inserted in page
