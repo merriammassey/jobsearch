@@ -26,6 +26,7 @@ var getJobDetails = function () {
     if (response.ok) {
       response.json().then(function (data) {
         console.log(data);
+        /*
         //display data
         document.querySelector("#outlook-container").innerHTML =
           "Outlook: " + data.OccupationDetail[0].BrightOutlook;
@@ -47,6 +48,7 @@ var getJobDetails = function () {
           parseFloat(
             data.OccupationDetail[0].Wages.StateWagesList[0].Pct90
           ).toLocaleString("en");
+          */
       });
     }
   });
@@ -92,8 +94,7 @@ function searchJobs() {
 
 //Display search results on page
 function displaySearchResults(arr) {
-
-
+  //empty div of old contents
   testContainer. textContent = ""
   //loop through array of results
   for (i = 0; i < arr.length; i++) {
