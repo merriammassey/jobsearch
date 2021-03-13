@@ -1,16 +1,16 @@
-//<<<<<<< merriam
+//Global Variables
 //example api call to careeronestop
 var headers = {headers: {"Authorization": `Bearer ${"VxzwGtuIBO4RhfWqV1PE5A6Fv+th3lF+0OvVdE2Ut+o3cWNPShrrWi+d2ZRH5mWgBRGkFn/a2zCtczThZhYZ1A=="}`}};
 var careerApi = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/web%20developers/85268?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false"
-
-// variables for job listings
-var jobName = "web developer"
-//var jobLocation = "phoenix az"
+var jobSearch = document.querySelector("#job-search");
+var locationSearch = document.querySelector("#location-search");
+var testContainer = document.querySelector("#test-job-container");
 
 var getJobDetails = function() {
   //variables for job details -  make plural and add url encoding to variables above for this api
+  var jobName = jobSearch.value;
   var encodedJobName = encodeURIComponent(jobName + "s");
-  var jobLocation = "85268";
+  var jobLocation = locationSearch.value;
   
   //if there is a correctly entered job location, use it in the api request
   
@@ -22,9 +22,7 @@ var getJobDetails = function() {
   }
 
   //variables for job details - need to add url encoding to variables above
-  var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + jobName + "/" + jobLocation + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";     
-  fetch(careerUrl, headers).then(function(response) {
-
+  var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + jobName + "/" + jobLocation + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";
 
   fetch(careerUrl, headers).then(function(response) {
   //fetch(careerApi, headers).then(function(response) {
@@ -42,42 +40,14 @@ var getJobDetails = function() {
     else {
       alert("error: Please enter either city, state (Chicago, IL), state (IL), or ZIP code (61299). With city, state, you must use a comma."); 
     } 
+
   });
 };
-  
-getJobDetails();
-
-var jobName = "web developer"
-var jobLocation = "phoenix az"
-var searchApi = "https://www.googleapis.com/customsearch/v1?key=AIzaSyDN1URsMNvO298DwJn6yW7QN8FC-uaAe-U&cx=261baf09873055c10&q=" + jobName + jobLocation
-
-function searchJobs(){
-  fetch(searchApi)
-      .then(function(response){
-         if(response.ok){ 
-          response.json().then(function(data){
-          document.querySelector("#test-container").textContent = data;
-          console.log(data);
-
-          document.querySelector("#test-container").innerHTML = data.items[1].htmlTitle
-          })
-      }
-      else{
-          alert("error:" + response.statusText); 
-      }
-  });
-};
-  
-searchJobs()
-=======
-var jobSearch = document.querySelector("#job-search");
-var locationSearch = document.querySelector("#location-search");
-var testContainer = document.querySelector("#test-job-container");
 
 //search Google for parameters inserted in page
 function searchJobs() {
   var searchApi =
-    "https://www.googleapis.com/customsearch/v1?key=AIzaSyDN1URsMNvO298DwJn6yW7QN8FC-uaAe-U&cx=261baf09873055c10&q=" +
+    "https://www.googleapis.com/customsearch/v1/siterestrict?key=AIzaSyDN1URsMNvO298DwJn6yW7QN8FC-uaAe-U&cx=261baf09873055c10&cr=us&dateRestrict=d[30]&num=10&sort=date&q=" +
     jobSearch.value + "&hq="
     locationSearch.value;
 
@@ -87,7 +57,6 @@ function searchJobs() {
       var searchArr = []; //define object array for results
       //parse JSON into array then assign variables for all releveant objects
       response.json().then(function (data) {
-        console.log(data);
         for (i = 0; i < data.items.length; i++) {
           var searchTitle = data.items[i].title; //HTML title of page
           var searchLink = data.items[i].link; //URL of job posting
@@ -101,6 +70,7 @@ function searchJobs() {
           });
         }
         displaySearchResults(searchArr);
+        getJobDetails();
       });
     }
     //otherwise return error code
@@ -133,4 +103,3 @@ function displaySearchResults(arr) {
 
 //search Google on button click
 document.querySelector("#go-button").addEventListener("click", searchJobs);
-//>>>>>>> main
