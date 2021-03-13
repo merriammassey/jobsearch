@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -22,9 +22,10 @@
     integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/style.css" />
   <!-- Compressed JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
-  <title>Jobless</title>
+  <!--<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script> -->
+
+    <title>Jobless</title>
 </head>
 
 <body>
@@ -37,43 +38,53 @@
         <h3>Career Search</h3>
         <div class="row columns">
           <label>Job Title
-            <input type="text" name="keyword" placeholder="Any">
+            <input id="job-search" type="text" name="keyword" placeholder="Any">
           </label>
         </div>
         <div class="row columns">
           <label>Location
-            <input type="text" name="keyword" placeholder="Any">
+            <input id="location-search" type="text" name="keyword" placeholder="Any">
           </label>
         </div>
-        <button type="button" class="primary button expanded search-button">
+        <button id="go-button" type="button" class="primary button expanded search-button">
           Search
         </button>
       </form>
     </div>
   </div>
-  <script src="js/vendor/jquery.js"></script>
+
+  <div class="split left">
+    <div class="centered">
+        <h1> Job listings</h1>
+        <br />
+        <p id="test-container"></p>
+    </div>
+</div>
+<div class="split right">
+    <div class="centered">
+        <h1>Statistics</h1>
+        <br />
+        <p id="outlook-container"></p>
+        <p id="growth-container"></p>
+        <p id="description-container"></p>
+        <p id="mediansalary-container"></p>
+        <p id="salaryrange-container"></p>
+    </div>
+</div>
+  <!--<script src="js/vendor/jquery.js"></script>
   <script src="js/vendor/what-input.js"></script>
-  <script src="js/vendor/foundation.min.js"></script>
+  <script src="js/vendor/foundation.min.js"></script> -->
   <script src="./assets/js/script.js"></script>
-  <script>
+  <!--<script>
     $(document).foundation();
-  </script>
+  </script> -->
   <footer></footer>
 
 
     <!--Container for job listings-->
-    <p id="test-container"></p>
-    <!--Container for career info-->
-    <p id="outlook-container"></p>
-    <p id="growth-container"></p>
-    <p id="description-container"></p>
-    <p id="mediansalary-container"></p>
-    <p id="salaryrange-container"></p>
 
-    <input type= "text", id="job-search" placeholder="jobsearch" >
-    <input type= "text", id="location-search" placeholder="location">
-    <input type= "button", id="go-button" text= "search">
-    <div class="test-job-container" id="test-job-container"></div>
+    <!--Container for career info-->
+    
 
     </div>
 
