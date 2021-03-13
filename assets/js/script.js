@@ -71,6 +71,7 @@ function searchJobs() {
         }
         displaySearchResults(searchArr);
         getJobDetails();
+        window.replace("./assets/results.html");
       });
     }
     //otherwise return error code
