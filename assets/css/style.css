@@ -1,0 +1,60 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+.jumbotron {
+  background-image: url(../images/Joblogo.png);
+  background-position: center;
+  height: 200px;
+  width: 500px;
+}
+.Divcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 95vh;
+}
+footer {
+  background: rgba(54, 54, 54, 0.8);
+  width: 100%;
+  position: fixed;
+  padding: 20px 20px;
+  bottom: 0;
+}
+.translucent-form-overlay {
+  max-width: 500px;
+  width: 100%;
+  background-color: rgba(54, 54, 54, 0.8);
+  padding: 20px;
+  color: #fefefe;
+}
+
+.translucent-form-overlay .columns.row {
+  display: block;
+}
+
+.translucent-form-overlay h3,
+.translucent-form-overlay label {
+  color: #fefefe;
+}
+.translucent-form-overlay h3 {
+  text-align: center;
+}
+
+.translucent-form-overlay input,
+.translucent-form-overlay select {
+  color: #8a8a8a;
+}
+
+.translucent-form-overlay input::-webkit-input-placeholder {
+  color: #8a8a8a;
+}
+
+.translucent-form-overlay input:-ms-input-placeholder {
+  color: #8a8a8a;
+}
+
+.translucent-form-overlay input::placeholder {
+  color: #8a8a8a;
+}
