@@ -1,49 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- foundation-float.min.css: Compressed CSS with legacy Float Grid -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-float.min.css"
-    integrity="sha256-4ldVyEvC86/kae2IBWw+eJrTiwNEbUUTmN0zkP4luL4=" crossorigin="anonymous">
 
-  <!-- foundation-prototype.min.css: Compressed CSS with prototyping classes -->
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-prototype.min.css"
-    integrity="sha256-BiKflOunI0SIxlTOOUCQ0HgwXrRrRwBkIYppEllPIok=" crossorigin="anonymous">
+<!-- Compressed CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+<!-- Custom Styles -->
+<link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- foundation-rtl.min.css: Compressed CSS with right-to-left reading direction -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-rtl.min.css"
-    integrity="sha256-F+9Ns8Z/1ZISonBbojH743hsmF3x3AlQdJEeD8DhQsE=" crossorigin="anonymous">
-  <!-- Compressed CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
-    integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <!-- Compressed JavaScript -->
-  <!--<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script> -->
-
-    <title>Jobless</title>
+<title>Jobless</title>
 </head>
 
 <body>
-
+<div class="grid-container align-center text-center">
   <div class="Divcontainer">
     <div class="jumbotron">
     </div>
     <div class="translucent-form-overlay">
       <form>
-        <h3>Career Search</h3>
         <div class="row columns">
-          <label>Job Title
-            <input id="job-search" type="text" name="keyword" placeholder="Any">
+          <label>I am looking for:
+            <input id="job-search" type="text" name="keyword" placeholder="Job Title">
           </label>
         </div>
         <div class="row columns">
-          <label>Location
-            <input id="location-search" type="text" name="keyword" placeholder="Any">
+          <label>in
+            <input id="location-search" type="text" name="keyword" placeholder="City, State">
+          </label>
+          <label>OR
+            <input id="zip-search" type="text" name="zipcode" placeholder="ZIP Code">
           </label>
         </div>
         <button id="go-button" type="button" class="primary button expanded search-button">
@@ -52,17 +40,17 @@
       </form>
     </div>
   </div>
+</div>
 
-  <div class="split left">
-    <div class="centered">
+<div class="grid-container">
+  <div class="grid-x grid-margin-x">
+    <div class="cell small large-6 text-center">
         <h1> Job listings</h1>
         <br />
-        <p id="test-container"></p>
+        <p id="job-listing-container"></p>
     </div>
-</div>
-<div class="split right">
-    <div class="centered">
-        <h1>Statistics</h1>
+    <div class="cell small large-6 text-center">
+        <h1 class=>Statistics</h1>
         <br />
         <p id="outlook-container"></p>
         <p id="growth-container"></p>
@@ -70,24 +58,30 @@
         <p id="mediansalary-container"></p>
         <p id="salaryrange-container"></p>
     </div>
+  </div>
 </div>
-  <!--<script src="js/vendor/jquery.js"></script>
-  <script src="js/vendor/what-input.js"></script>
-  <script src="js/vendor/foundation.min.js"></script> -->
-  <script src="./assets/js/script.js"></script>
-  <!--<script>
-    $(document).foundation();
-  </script> -->
-  <footer></footer>
 
-
-    <!--Container for job listings-->
-
-    <!--Container for career info-->
-    
+<!--
+  <div class="split left">
+    <div class="centered">
 
     </div>
+</div>
+<div class="split right">
+    <div class="centered">
 
-    <script src = "./assets/js/script.js"></script>
+    </div>
+</div>
+-->
+<footer></footer>
+<!-- JQuery-->
+<script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Compressed JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+
+<script src="./assets/js/script.js"></script>
+<script>
+    $(document).foundation();
+</script>
 </body>
 </html>

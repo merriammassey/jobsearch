@@ -4,7 +4,7 @@ var headers = {headers: {"Authorization": `Bearer ${"VxzwGtuIBO4RhfWqV1PE5A6Fv+t
 var careerApi = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/web%20developers/85268?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false"
 var jobSearch = document.querySelector("#job-search");
 var locationSearch = document.querySelector("#location-search");
-var testContainer = document.querySelector("#test-job-container");
+var jobSearchContainer = document.querySelector("#job-listing-container");
 
 var getJobDetails = function() {
   //variables for job details -  make plural and add url encoding to variables above for this api
@@ -98,7 +98,7 @@ function displaySearchResults(arr) {
     //append content to page
     jobContainer.appendChild(jobTitleText);
     jobContainer.appendChild(jobSnippetText);
-    testContainer.appendChild(jobContainer);
+    jobSearchContainer.appendChild(jobContainer);
   };
 };
 
