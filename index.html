@@ -15,42 +15,47 @@
 </head>
 
 <body>
-<div class="grid-container align-center text-center">
-  <div class="Divcontainer">
-    <div class="jumbotron">
+<div class="grid-container align-center text-center medium-gray">
+    <div class="jumbotron grid-x medium-gray">
     </div>
     <div class="translucent-form-overlay">
       <form>
-        <div class="row columns">
+        <div class="grid-x grid-margin-x">
+          <div class= "cell small-12 large-4">
           <label>I am looking for:
             <input id="job-search" type="text" name="keyword" placeholder="Job Title">
           </label>
+          </div>
+          <div class="cell small-12 large-4">
+            <label>IN:
+              <input id="location-search" type="text" name="keyword" placeholder="City, State">
+            </label>
+          </div>
+          <div class="cell small-12 large-4">
+            <label>OR:
+              <input id="zip-search" type="text" name="zipcode" placeholder="ZIP Code">
+            </label>
+          </div>
         </div>
-        <div class="row columns">
-          <label>in
-            <input id="location-search" type="text" name="keyword" placeholder="City, State">
-          </label>
-          <label>OR
-            <input id="zip-search" type="text" name="zipcode" placeholder="ZIP Code">
-          </label>
-        </div>
-        <button id="go-button" type="button" class="primary button expanded search-button">
-          Search
-        </button>
+        
+        <button id="go-button" type="button" class="primary button expanded search-button">Search</button>            
       </form>
     </div>
-  </div>
 </div>
 
+<hr>
+
 <div class="grid-container">
+  <div class="large-cell-block-container">
   <div class="grid-x grid-margin-x">
-    <div class="cell small large-6 text-center">
+    <div class="cell small large-6 text-center hide" id="listing-search-container">
         <h1> Job listings</h1>
+        <p><small>Click link to go directly to job posting!</small></p>
         <br />
-        <p id="job-listing-container"></p>
+        <p id="job-listing-container" class="large-cell-block-y"></p>
     </div>
-    <div class="cell small large-6 text-center">
-        <h1 class=>Statistics</h1>
+    <div class="cell small large-6 text-center hide large-cell-block-container" id="statistics-search-container">
+        <h1>Statistics</h1>
         <br />
         <p id="outlook-container"></p>
         <p id="growth-container"></p>
@@ -60,19 +65,8 @@
     </div>
   </div>
 </div>
-
-<!--
-  <div class="split left">
-    <div class="centered">
-
-    </div>
 </div>
-<div class="split right">
-    <div class="centered">
 
-    </div>
-</div>
--->
 <footer></footer>
 <!-- JQuery-->
 <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

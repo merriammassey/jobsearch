@@ -71,7 +71,6 @@ function searchJobs() {
         }
         displaySearchResults(searchArr);
         getJobDetails();
-        window.replace("./assets/results.html");
       });
     }
     //otherwise return error code
@@ -99,6 +98,10 @@ function displaySearchResults(arr) {
     jobContainer.appendChild(jobTitleText);
     jobContainer.appendChild(jobSnippetText);
     jobSearchContainer.appendChild(jobContainer);
+
+    //show content
+    document.querySelector("#listing-search-container").classList.remove("hide");
+    document.querySelector("#statistics-search-container").classList.remove("hide");
   };
 };
 
