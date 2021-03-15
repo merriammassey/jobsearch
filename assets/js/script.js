@@ -14,7 +14,11 @@ var zipSearchContainer = document.querySelector("#zip-search");
 var jobSearchContainer = document.querySelector("#job-listing-container");
 
 var getJobDetails = function (title, location) {
-  document.querySelector("#statistics-search-container").innerHTML = "";
+  document.querySelector("#outlook-container").innerHTML = ""
+  document.querySelector("#growth-container").innerHTML = ""
+  document.querySelector("#description-container").innerHTML = ""
+  document.querySelector("#mediansalary-container").innerHTML = ""
+  document.querySelector("#salaryrange-container").innerHTML = ""
   //variables for job details -  make plural and add url encoding to variables above for this api
   var encodedJobName = encodeURIComponent(title + "s");
 
@@ -51,6 +55,9 @@ var getJobDetails = function (title, location) {
             data.OccupationDetail[0].Wages.StateWagesList[0].Pct90
           ).toLocaleString("en");
       });
+    }
+    else{
+      document.querySelector("#outlook-container").textContent = "No statistics available for this occupation."
     }
   });
 };
@@ -127,6 +134,10 @@ function displaySearchResults(arr) {
     var jobContainer = document.createElement("div");
     var jobTitleText = document.createElement("h3");
     var jobSnippetText = document.createElement("p");
+
+    //apply classes
+    jobTitleText.classList.add("searchTitle");
+    jobSnippetText.classList.add("searchSnippet");
 
     //insert text into those elements
     jobTitleText.innerHTML =
