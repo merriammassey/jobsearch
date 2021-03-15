@@ -12,25 +12,13 @@ var jobSearchContainer = document.querySelector("#job-listing-container");
 var getJobDetails = function(title, location) {
   //variables for job details -  make plural and add url encoding to variables above for this api
   var encodedJobName = encodeURIComponent(title + "s");
-
-  //if there is a correctly entered job location, use it in the api request 
-  if(location){
     
-    var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + encodedJobName + "/" + location + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";     
-  // if there is no job location 
-  } else {
-    alert("error: Please enter either city, state (Chicago, IL), state (IL), or ZIP code (61299). With city, state, you must use a comma."); 
-  }
+  var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + encodedJobName + "/" + location + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";     
 
-  //variables for job details - need to add url encoding to variables above
-  //var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + jobName + "/" + jobLocation + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";
-
+  //return career info from careeronestop api
   fetch(careerUrl, headers).then(function(response) {
-    console.log(response);
-  //fetch(careerApi, headers).then(function(response) {
     if (response.ok) {
       response.json().then(function(data) {
-      console.log(data);
       //display data
       document.querySelector("#outlook-container").innerHTML = "Outlook: " + data.OccupationDetail[0].BrightOutlook;
       document.querySelector("#growth-container").innerHTML = "Growth: " + data.OccupationDetail[0].BrightOutlookCategory;
@@ -40,7 +28,7 @@ var getJobDetails = function(title, location) {
       });
     } 
     else {
-      alert("error: Please enter either city, state (Chicago, IL), state (IL), or ZIP code (61299). With city, state, you must use a comma."); 
+      console.log("error" + response.statusText); 
     } 
 
   });
