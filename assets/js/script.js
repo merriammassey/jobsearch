@@ -4,27 +4,29 @@ var headers = {headers: {"Authorization": `Bearer ${"VxzwGtuIBO4RhfWqV1PE5A6Fv+t
 var careerApi = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/web%20developers/85268?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false"
 var jobSearch = document.querySelector("#job-search");
 var locationSearch = document.querySelector("#location-search");
-var testContainer = document.querySelector("#test-job-container");
+var jobSearchContainer = document.querySelector("#job-listing-container");
 
-var getJobDetails = function() {
+var getJobDetails = function(title, location) {
   //variables for job details -  make plural and add url encoding to variables above for this api
-  var jobName = jobSearch.value;
-  var encodedJobName = encodeURIComponent(jobName + "s");
-  var jobLocation = locationSearch.value;
+  //var jobName = jobSearch.value;
+  var encodedJobName = encodeURIComponent(title + "s");
+
+  //var jobLocation = locationSearch.value;
   
   //if there is a correctly entered job location, use it in the api request
   
-  if(jobLocation){
-    var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + encodedJobName + "/" + jobLocation + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";     
+  if(location){
+    var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + encodedJobName + "/" + location + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";     
   // if there is no job location 
   } else {
     alert("error: Please enter either city, state (Chicago, IL), state (IL), or ZIP code (61299). With city, state, you must use a comma."); 
   }
 
   //variables for job details - need to add url encoding to variables above
-  var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + jobName + "/" + jobLocation + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";
+  //var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + jobName + "/" + jobLocation + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";
 
   fetch(careerUrl, headers).then(function(response) {
+    console.log(response);
   //fetch(careerApi, headers).then(function(response) {
     if (response.ok) {
       response.json().then(function(data) {
@@ -46,10 +48,12 @@ var getJobDetails = function() {
 
 //search Google for parameters inserted in page
 function searchJobs() {
+  var searchTerm = jobSearch.value;
+  var searchLocation = locationSearch.value;
   var searchApi =
     "https://www.googleapis.com/customsearch/v1/siterestrict?key=AIzaSyDN1URsMNvO298DwJn6yW7QN8FC-uaAe-U&cx=261baf09873055c10&cr=us&dateRestrict=d[30]&num=10&sort=date&q=" +
-    jobSearch.value + "&hq="
-    locationSearch.value;
+    searchTerm + "&hq="
+    searchLocation;
 
   fetch(searchApi).then(function (response) {
     //if valid response received
@@ -70,8 +74,7 @@ function searchJobs() {
           });
         }
         displaySearchResults(searchArr);
-        getJobDetails();
-        window.replace("./assets/results.html");
+        getJobDetails(searchTerm, searchLocation);
       });
     }
     //otherwise return error code
@@ -98,7 +101,11 @@ function displaySearchResults(arr) {
     //append content to page
     jobContainer.appendChild(jobTitleText);
     jobContainer.appendChild(jobSnippetText);
-    testContainer.appendChild(jobContainer);
+    jobSearchContainer.appendChild(jobContainer);
+
+    //show content
+    document.querySelector("#listing-search-container").classList.remove("hide");
+    document.querySelector("#statistics-search-container").classList.remove("hide");
   };
 };
 

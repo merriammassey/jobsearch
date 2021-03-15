@@ -1,13 +1,16 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
+  background-color: lightgrey;
 }
 .jumbotron {
   background-image: url(../images/Joblogo.png);
+  margin: 0 auto;
   background-position: center;
   height: 200px;
   width: 500px;
 }
+/*
 .Divcontainer {
   display: flex;
   flex-direction: column;
@@ -15,6 +18,7 @@ body {
   align-items: center;
   min-height: 95vh;
 }
+*/
 footer {
   background: rgba(54, 54, 54, 0.8);
   width: 100%;
@@ -22,6 +26,7 @@ footer {
   padding: 20px 20px;
   bottom: 0;
 }
+/*
 .translucent-form-overlay {
   max-width: 500px;
   width: 100%;
@@ -59,25 +64,9 @@ footer {
   color: #8a8a8a;
 }
 
+*/
 
-.split {
-  height: 100%;
-  width: 50%;
-  position: fixed;
-  z-index: 1;
-  top: 100px;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
 
-.left {
-  left: 0;
-  background-color: white;
-}
-.right {
-  right: 0;
-  background-color: white;
-}
 .centered {
   position: absolute;
   top: 50%;
