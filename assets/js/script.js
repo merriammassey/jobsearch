@@ -4,18 +4,20 @@ var headers = {headers: {"Authorization": `Bearer ${"VxzwGtuIBO4RhfWqV1PE5A6Fv+t
 var careerApi = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/web%20developers/85268?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false"
 var jobSearch = document.querySelector("#job-search");
 var locationSearch = document.querySelector("#location-search");
+var stateSearchContainer = document.querySelector("#state-dropdown");
+var zipSearchContainer = document.querySelector("#zip-search")
 var jobSearchContainer = document.querySelector("#job-listing-container");
+
 
 var getJobDetails = function(title, location) {
   //variables for job details -  make plural and add url encoding to variables above for this api
-  //var jobName = jobSearch.value;
   var encodedJobName = encodeURIComponent(title + "s");
-
-  //var jobLocation = locationSearch.value;
+  var zipCode = zipSearchContainer
   
   //if there is a correctly entered job location, use it in the api request
   
   if(location){
+    
     var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + encodedJobName + "/" + location + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";     
   // if there is no job location 
   } else {
@@ -86,6 +88,7 @@ function searchJobs() {
 
 //Display search results on page
 function displaySearchResults(arr) {
+  document.querySelector("#job-listing-container").innerHTML = "";
   //loop through array of results
   for (i = 0; i < arr.length; i++) {
     //create elements on the page
