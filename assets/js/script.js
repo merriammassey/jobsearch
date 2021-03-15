@@ -12,10 +12,8 @@ var jobSearchContainer = document.querySelector("#job-listing-container");
 var getJobDetails = function(title, location) {
   //variables for job details -  make plural and add url encoding to variables above for this api
   var encodedJobName = encodeURIComponent(title + "s");
-  var zipCode = zipSearchContainer
-  
-  //if there is a correctly entered job location, use it in the api request
-  
+
+  //if there is a correctly entered job location, use it in the api request 
   if(location){
     
     var careerUrl = "https://api.careeronestop.org/v1/occupation/cy8juvgHGs77LlU/" + encodedJobName + "/" + location + "?training=false&interest=false&videos=false&tasks=false&dwas=false&wages=true&alternateOnetTitles=false&projectedEmployment=true&ooh=true&stateLMILinks=false&relatedOnetTitles=false&skills=false&knowledge=false&ability=false&trainingPrograms=false";     
@@ -51,11 +49,25 @@ var getJobDetails = function(title, location) {
 //search Google for parameters inserted in page
 function searchJobs() {
   var searchTerm = jobSearch.value;
-  var searchLocation = locationSearch.value;
+  var searchLocation
   var searchApi =
     "https://www.googleapis.com/customsearch/v1/siterestrict?key=AIzaSyDN1URsMNvO298DwJn6yW7QN8FC-uaAe-U&cx=261baf09873055c10&cr=us&dateRestrict=d[30]&num=10&sort=date&q=" +
     searchTerm + "&hq="
     searchLocation;
+
+    //determine which inputs to use for location variable in searches
+    if(locationSearch.value !== "" && stateSearchContainer.value !== "" && zipSearchContainer.value !== ""){
+      searchLocation = locationSearch.value + ", " + stateSearchContainer.value + " " + zipSearchContainer.value;
+    }
+    else if(locationSearch.value !== "" && stateSearchContainer.value !== ""){
+      searchLocation = locationSearch.value + ", " + stateSearchContainer.value;
+    }
+    else if(zipSearchContainer.value !== ""){
+      searchLocation = zipSearchContainer.value;
+    }
+    else{
+      alert("Please enter a valid location.");
+    }
 
   fetch(searchApi).then(function (response) {
     //if valid response received
