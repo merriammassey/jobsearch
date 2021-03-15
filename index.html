@@ -1,39 +1,54 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compressed CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+      integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
+      crossorigin="anonymous"
+    />
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="assets/css/style.css" />
 
-<!-- Compressed CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
-<!-- Custom Styles -->
-<link rel="stylesheet" href="assets/css/style.css" />
+    <title>Jobless</title>
+  </head>
 
-<title>Jobless</title>
-</head>
-
-<body>
-<div class="grid-container align-center text-center medium-gray">
-    <div class="jumbotron grid-x medium-gray">
-    </div>
-    <div class="translucent-form-overlay">
-      <form>
-        <div class="grid-x grid-margin-x">
-          <div class= "cell small-12 large-4">
-          <label>I am looking for:
-            <input id="job-search" type="text" name="keyword" placeholder="Job Title">
-          </label>
-          </div>
-          <div class="cell small-6 large-3">
-            <label>IN:
-              <input id="location-search" type="text" name="keyword" placeholder="City">
-            </label>
-          </div>
-          <div class="cell small-6 large-1">
-            <label for="state-dropdown">State</label>
-            <select name="state-dropdown" id="state-dropdown">
+  <body>
+    <div class="grid-container align-center text-center medium-gray">
+      <div class="jumbotron grid-x medium-gray"></div>
+      <div class="translucent-form-overlay">
+        <form>
+          <div class="grid-x grid-margin-x">
+            <div class="cell small-12 large-4">
+              <label
+                >I am looking for:
+                <input
+                  id="job-search"
+                  type="text"
+                  name="keyword"
+                  placeholder="Job Title"
+                />
+              </label>
+            </div>
+            <div class="cell small-6 large-3">
+              <label
+                >IN:
+                <input
+                  id="location-search"
+                  type="text"
+                  name="keyword"
+                  placeholder="City"
+                />
+              </label>
+            </div>
+            <div class="cell small-6 large-1">
+              <label for="state-dropdown">State</label>
+              <select name="state-dropdown" id="state-dropdown">
                 <option value=" "></option>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
@@ -86,53 +101,95 @@
                 <option value="WV">West Virginia</option>
                 <option value="WI">Wisconsin</option>
                 <option value="WY">Wyoming</option>
-            </select>
+              </select>
+            </div>
+            <div class="cell small-12 large-4">
+              <label
+                >ZIP:
+                <input
+                  id="zip-search"
+                  type="text"
+                  name="zipcode"
+                  placeholder="ZIP Code"
+                />
+              </label>
+            </div>
           </div>
-          <div class="cell small-12 large-4">
-            <label>ZIP:
-              <input id="zip-search" type="text" name="zipcode" placeholder="ZIP Code">
-            </label>
+
+          <button
+            id="go-button"
+            type="button"
+            class="primary button expanded search-button"
+          >
+            Search
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="grid-container">
+      <div class="large-cell-block-container">
+        <div class="grid-x grid-margin-x">
+          <div
+            class="cell small large-6 text-center hide"
+            id="listing-search-container"
+          >
+            <h1>Job listings</h1>
+            <p><small>Click link to go directly to job posting!</small></p>
+            <br />
+            <p id="job-listing-container" class="large-cell-block-y"></p>
+          </div>
+          <div
+            class="cell small large-6 text-center hide large-cell-block-container"
+            id="statistics-search-container"
+          >
+            <h1>Statistics</h1>
+            <br />
+            <p id="outlook-container"></p>
+            <p id="growth-container"></p>
+            <p id="description-container"></p>
+            <p id="mediansalary-container"></p>
+            <p id="salaryrange-container"></p>
           </div>
         </div>
-        
-        <button id="go-button" type="button" class="primary button expanded search-button">Search</button>            
-      </form>
+      </div>
     </div>
-</div>
 
-<hr>
+    <footer></footer>
 
-<div class="grid-container">
-  <div class="large-cell-block-container">
-  <div class="grid-x grid-margin-x">
-    <div class="cell small large-6 text-center hide" id="listing-search-container">
-        <h1> Job listings</h1>
-        <p><small>Click link to go directly to job posting!</small></p>
-        <br />
-        <p id="job-listing-container" class="large-cell-block-y"></p>
+    <div class="reveal" id="locationModal" data-reveal>
+      <h1>Error:</h1>
+      <p class="lead">Please input a valid location.</p>
+      <p>
+        Locations can be searched by either City and State, ZIP code, or all
+        three.
+      </p>
+      <button class="close-button" data-close aria-label="Close" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-    <div class="cell small large-6 text-center hide large-cell-block-container" id="statistics-search-container">
-        <h1>Statistics</h1>
-        <br />
-        <p id="outlook-container"></p>
-        <p id="growth-container"></p>
-        <p id="description-container"></p>
-        <p id="mediansalary-container"></p>
-        <p id="salaryrange-container"></p>
+
+    <div class="reveal" id="jobModal" data-reveal>
+      <h1>Error:</h1>
+      <p class="lead">Please input a valid job title.</p>
+      <button class="close-button" data-close aria-label="Close" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-  </div>
-</div>
-</div>
+    <!-- JQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Compressed JavaScript -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+      integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
+      crossorigin="anonymous"
+    ></script>
 
-<footer></footer>
-<!-- JQuery-->
-<script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- Compressed JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
-
-<script src="./assets/js/script.js"></script>
-<script>
-    $(document).foundation();
-</script>
-</body>
+    <script src="./assets/js/script.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
 </html>
