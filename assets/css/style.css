@@ -28,3 +28,94 @@ footer {
 .searchSnippet{
   font-size: medium;
 }
+
+
+
+.tag-cloud-section {
+
+  padding: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.tag-cloud-title {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #e6e6e6;
+  border-bottom: 1px solid #cacaca;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.tag-cloud {
+  margin: 1rem;
+  text-align: center;
+  list-style: none;
+}
+
+.tag-cloud .tag-cloud-individual-tag {
+  display: inline-block;
+  padding: 0.33333rem 0.5rem;
+  border-radius: 0;
+  font-size: 0.8rem;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: default;
+  border-radius: 5000px;
+  background: #2c3840;
+  display: inline-block;
+  color: #e6e6e6;
+  margin: 3px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.tag-cloud .tag-cloud-individual-tag .fa {
+  margin-left: 7px;
+  color: #e6e6e6;
+}
+
+.tag-cloud .tag-cloud-individual-tag:hover {
+  background: black;
+  transition: background-color .2s ease-in;
+}
+
+
+/* styles for hidden "to-do" style search history buttons in HTML
+
+.todo-list-card {
+  background-color: #fefefe;
+  border-radius: 0;
+  max-width: 500px;
+}
+
+.todo-list-card .card-divider {
+  border-bottom: 2px solid #cacaca;
+  background: inherit;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.todo-list-card .card-divider h3 {
+  margin-bottom: 0;
+}
+
+
+.todo-list-card ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+.todo-list-card ul li {
+  background-color: #e6e6e6;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+
+
