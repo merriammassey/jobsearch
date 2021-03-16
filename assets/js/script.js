@@ -62,6 +62,30 @@ var getJobDetails = function (title, location) {
   });
 };
 
+// function to save searches as array of objects in localstorage
+var saveSearch = function(searchTerm, searchLocation) {
+  //get the array from local storage
+  var searchObjArr = JSON.parse(localStorage.getItem("searchObjArr"));
+  //if it's empty, create an empty array and push object with search criteria
+  if(!searchObjArr) {
+    var searchObjArr = [];
+    searchObjArr.push({
+      searchTerm: searchTerm,
+      searchLocation: searchLocation
+    });
+  //if it's not empty, parse the array and add new object with search criteria
+  } else {
+  var searchObjArr = JSON.parse(localStorage.getItem("searchObjArr"));
+  searchObjArr.push({
+    searchTerm: searchTerm,
+    searchLocation: searchLocation
+  });
+}
+  // save the array as a string in local storage
+  var searchObjArrStringified = JSON.stringify(searchObjArr);
+  localStorage.setItem("searchObjArr", searchObjArrStringified);
+}
+
 //search Google for parameters inserted in page
 function searchJobs() {
   var searchTerm = jobSearch.value;
@@ -123,6 +147,7 @@ function searchJobs() {
   } else {
     jobModal();
   }
+saveSearch(searchTerm, searchLocation);
 }
 
 //Display search results on page
@@ -157,6 +182,7 @@ function displaySearchResults(arr) {
       .querySelector("#statistics-search-container")
       .classList.remove("hide");
   }
+  
 }
 
 function locationModal() {
