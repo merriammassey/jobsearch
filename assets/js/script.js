@@ -65,51 +65,33 @@ var getJobDetails = function (title, location) {
   });
 };
 
-// if there is no array, make an array
-// if the array doesn't include this search, add it
-
-
-
 // function to save searches as array of objects in localstorage
 var saveSearch = function(searchTerm, searchLocation) {
+
   //parse the array in local storage
-  var searchObjArr = JSON.parse(localStorage.getItem("searchObjArr"));
-  //if there's no array, create one
-  if(!searchObjArr) {
-  searchObjArr = [];
-  // then add this search to the array
+  var searchObjArr = JSON.parse(localStorage.getItem("searchObjArr")) || [];
+  //console.log(searchObjArr);
+  //console.log({searchTerm, searchLocation});
+
+  for (i=0; i<searchObjArr.length; i++) {
+    if(searchObjArr[i].searchTerm === searchTerm
+      && searchObjArr[i].searchLocation === searchLocation) {
+      //console.log("they're equal");
+      return
+      };
+  };
+
+  // if the array doesn't have this search, add it and make a button
   searchObjArr.push({
     searchTerm: searchTerm,
     searchLocation: searchLocation
   });
-  // and save the array as a string in local storage
+  // save the array as a string in local storage
   var searchObjArrStringified = JSON.stringify(searchObjArr);
   localStorage.setItem("searchObjArr", searchObjArrStringified);
   // and make a button and append to page
   makeButton(searchTerm, searchLocation);
-  
-} else {
-  //var searchObjArrStringified = JSON.stringify(searchObjArr);
-  //if the array doesn't include this exact search 
-  //for(i=0; i < searchObjArr.length; i++){
-    //if(!searchObjArr[i].searchTerm.toUpperCase() == searchTerm.toUpperCase()) && (searchObjArr[i].searchLocation.toUpperCase() == searchLocation.toUpperCase())) {
-      // then add this search to the array
-      if(!searchObjArr.includes({
-        searchTerm: searchTerm,
-        searchLocation: searchLocation
-      })) {
-      searchObjArr.push({
-      searchTerm: searchTerm,
-      searchLocation: searchLocation
-      })
-    };
-    // and save the array as a string in local storage
-    var searchObjArrStringified = JSON.stringify(searchObjArr);
-    localStorage.setItem("searchObjArr", searchObjArrStringified);
-    // and make a button and append to page
-    makeButton(searchTerm, searchLocation);
-  };
-}
+  }
 
 //function to make buttons for saved searches
 var makeButton = function(searchTerm, searchLocation) {
@@ -186,28 +168,6 @@ function searchJobs(searchTerm, searchLocation) {
     "https://www.googleapis.com/customsearch/v1/siterestrict?key=AIzaSyDN1URsMNvO298DwJn6yW7QN8FC-uaAe-U&cx=261baf09873055c10&cr=us&dateRestrict=d[30]&num=10&sort=date&q=" +
     searchTerm +
     "&hq=";
-  //searchLocation;
-  /*
-  //determine which inputs to use for location variable in searches
-  if (
-    locationSearch.value !== "" &&
-    stateSearchContainer.value !== "" &&
-    zipSearchContainer.value !== ""
-  ) {
-    searchLocation =
-      locationSearch.value +
-      ", " +
-      stateSearchContainer.value +
-      " " +
-      zipSearchContainer.value;
-  } else if (locationSearch.value !== "" && stateSearchContainer.value !== "") {
-    searchLocation = locationSearch.value + ", " + stateSearchContainer.value;
-  } else if (zipSearchContainer.value !== "") {
-    searchLocation = zipSearchContainer.value;
-  } else {
-    locationModal();
-  }
-*/
   if (jobSearch.value !== "") {
     fetch(searchApi).then(function (response) {
       //if valid response received
@@ -239,8 +199,9 @@ function searchJobs(searchTerm, searchLocation) {
   } else {
     jobModal();
   }
+
   // save this search in local storage
-  saveSearch(searchTerm, searchLocation);
+  saveSearch(searchTerm.toUpperCase(), searchLocation.toUpperCase());
 }
 
 //Display search results on page
