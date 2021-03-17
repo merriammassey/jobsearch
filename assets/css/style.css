@@ -29,8 +29,7 @@ footer {
   font-size: medium;
 }
 .grid-container:first-of-type{
-  border: none;
-  
+  border: none; 
 }
 
 .grid-container {
