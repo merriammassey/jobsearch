@@ -35,6 +35,22 @@ footer {
   max-width: 1000px;
   margin: 0 auto;
 }
+.grid-container:first-of-type{
+  border: none; 
+}
+
+.grid-container {
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+}
+.callout {
+  background-color: rgb(73, 73, 73);
+}
+label {
+  font-size: 20px;
+  color: white;
+}
 
 .tag-cloud-title {
   text-align: center;
