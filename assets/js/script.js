@@ -1,4 +1,7 @@
 //Global Variables
+//search Google on button click
+document.querySelector("#go-button").addEventListener("click", formSubmitHandler);
+
 //example api call to careeronestop
 var headers = {
   headers: {
@@ -88,23 +91,25 @@ var saveSearch = function(searchTerm, searchLocation) {
 } else {
   //var searchObjArrStringified = JSON.stringify(searchObjArr);
   //if the array doesn't include this exact search 
-  for(i=0; i < searchObjArr.length; i++){
-    if(!(searchObjArr[i].searchTerm.toUpperCase() == searchTerm.toUpperCase()) && (searchObjArr[i].searchLocation.toUpperCase() == searchLocation.toUpperCase())) {
+  //for(i=0; i < searchObjArr.length; i++){
+    //if(!searchObjArr[i].searchTerm.toUpperCase() == searchTerm.toUpperCase()) && (searchObjArr[i].searchLocation.toUpperCase() == searchLocation.toUpperCase())) {
       // then add this search to the array
+      if(!searchObjArr.includes({
+        searchTerm: searchTerm,
+        searchLocation: searchLocation
+      })) {
       searchObjArr.push({
       searchTerm: searchTerm,
       searchLocation: searchLocation
-    });
+      })
+    };
     // and save the array as a string in local storage
     var searchObjArrStringified = JSON.stringify(searchObjArr);
     localStorage.setItem("searchObjArr", searchObjArrStringified);
     // and make a button and append to page
     makeButton(searchTerm, searchLocation);
   };
-};
-};
 }
-
 
 //function to make buttons for saved searches
 var makeButton = function(searchTerm, searchLocation) {
@@ -116,10 +121,10 @@ var makeButton = function(searchTerm, searchLocation) {
   buttonsEl.appendChild(searchButton);
   searchButton.classList.add("tag-cloud-individual-tag");
   //console.log("make buttons");
-
   //add event listener. Do not call function, just attach it to button
-  searchButton.addEventListener("click", sendButtonToSearchJobs); 
+  searchButton.addEventListener("click", buttonClickHandler); 
 }
+
 // function with event parameter to get button info and send to search jobs function
 var sendButtonToSearchJobs = function(event) {
   //get and split text from buttons
@@ -136,16 +141,53 @@ var sendButtonToSearchJobs = function(event) {
   searchJobs();
 }
 
-//search Google for parameters inserted in page
-function searchJobs() {
+// 2 functions - one to get variables from form and the other to get variables from button
+var buttonClickHandler = function(event) {
+  var buttonText = event.target.innerText;
+  //console.log(buttonText);//get info from button
+  //split the text on the button into two variables for search
+  buttonTextSplit = buttonText.split(" IN ");
+  var searchTerm = buttonTextSplit[0];
+  var searchLocation = buttonTextSplit[1];
+  //send variables as parameters and call searchJobs function
+  searchJobs(searchTerm, searchLocation);
+}
+
+var formSubmitHandler = function(event) {
+  // get value from input element and trim off any spaces
   var searchTerm = jobSearch.value;
-  var searchLocation;
+  //determine which inputs to use for location variable in searches
+  if (
+    locationSearch.value !== "" &&
+    stateSearchContainer.value !== "" &&
+    zipSearchContainer.value !== ""
+  ) {
+    searchLocation =
+      locationSearch.value +
+      ", " +
+      stateSearchContainer.value +
+      " " +
+      zipSearchContainer.value;
+  } else if (locationSearch.value !== "" && stateSearchContainer.value !== "") {
+    searchLocation = locationSearch.value + ", " + stateSearchContainer.value;
+  } else if (zipSearchContainer.value !== "") {
+    searchLocation = zipSearchContainer.value;
+  } else {
+    locationModal();
+  };
+  searchJobs(searchTerm, searchLocation);
+}
+
+//search Google for parameters inserted in page
+function searchJobs(searchTerm, searchLocation) {
+  //var searchTerm = jobSearch.value;
+  //var searchLocation;
   var searchApi =
     "https://www.googleapis.com/customsearch/v1/siterestrict?key=AIzaSyDN1URsMNvO298DwJn6yW7QN8FC-uaAe-U&cx=261baf09873055c10&cr=us&dateRestrict=d[30]&num=10&sort=date&q=" +
     searchTerm +
     "&hq=";
-  searchLocation;
-
+  //searchLocation;
+  /*
   //determine which inputs to use for location variable in searches
   if (
     locationSearch.value !== "" &&
@@ -165,7 +207,7 @@ function searchJobs() {
   } else {
     locationModal();
   }
-
+*/
   if (jobSearch.value !== "") {
     fetch(searchApi).then(function (response) {
       //if valid response received
@@ -245,7 +287,7 @@ function jobModal() {
 }
 
 //search Google on button click
-document.querySelector("#go-button").addEventListener("click", searchJobs);
+document.querySelector("#go-button").addEventListener("click", formSubmitHandler);
 
 
 //function to make buttons load on page load
@@ -259,7 +301,7 @@ var buttonHistory = () =>{
           searchButton.innerText = searchObjArr[i].searchTerm + " in " + searchObjArr[i].searchLocation;
           buttonsEl.appendChild(searchButton);
           searchButton.classList.add("tag-cloud-individual-tag");
-          searchButton.addEventListener("click", searchJobs);
+          searchButton.addEventListener("click", buttonClickHandler);
       } 
   } else {
       console.log("empty storage");
