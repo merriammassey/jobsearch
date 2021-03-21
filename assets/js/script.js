@@ -111,16 +111,14 @@ var makeButton = function(searchTerm, searchLocation) {
 var sendButtonToSearchJobs = function(event) {
   //get and split text from buttons
   var buttonText = event.target.innerText;
-  //console.log(buttonText);//get info from button
+
   buttonTextSplit = buttonText.split(" IN ");
   var searchTerm = buttonTextSplit[0];
   var searchLocation = buttonTextSplit[1];
-  //console.log("searchTerm", searchTerm);
-  //console.log("searchLocation", searchLocation);
+
 
   //send the variables to the search jobs function
-  //searchJobs function isn't built to take parameters, so we need to solve how to call this using the variables split from the buttons
-  searchJobs();
+  searchJobs(searchTerm, searchLocation);
 }
 
 // 2 functions - one to get variables from form and the other to get variables from button
@@ -144,16 +142,14 @@ var formSubmitHandler = function(event) {
     stateSearchContainer.value !== "" &&
     zipSearchContainer.value !== ""
   ) {
-    searchLocation =
-      locationSearch.value +
-      ", " +
-      stateSearchContainer.value +
-      " " +
-      zipSearchContainer.value;
+    searchLocation = zipSearchContainer.value;
+
   } else if (locationSearch.value !== "" && stateSearchContainer.value !== "") {
     searchLocation = locationSearch.value + ", " + stateSearchContainer.value;
+
   } else if (zipSearchContainer.value !== "") {
     searchLocation = zipSearchContainer.value;
+
   } else {
     locationModal();
   };
@@ -162,12 +158,12 @@ var formSubmitHandler = function(event) {
 
 //search Google for parameters inserted in page
 function searchJobs(searchTerm, searchLocation) {
-  //var searchTerm = jobSearch.value;
-  //var searchLocation;
+  
   var searchApi =
     "https://www.googleapis.com/customsearch/v1/siterestrict?key=AIzaSyDN1URsMNvO298DwJn6yW7QN8FC-uaAe-U&cx=261baf09873055c10&cr=us&dateRestrict=d[30]&num=10&sort=date&q=" +
     searchTerm +
-    "&hq=";
+    "&hq=" + searchLocation;
+
   if (jobSearch.value !== "") {
     fetch(searchApi).then(function (response) {
       //if valid response received
