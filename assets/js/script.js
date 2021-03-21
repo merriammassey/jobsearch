@@ -131,6 +131,7 @@ var buttonClickHandler = function(event) {
   buttonTextSplit = buttonText.split(" IN ");
   var searchTerm = buttonTextSplit[0];
   var searchLocation = buttonTextSplit[1];
+  //console.log(searchTerm, searchLocation);
   //send variables as parameters and call searchJobs function
   searchJobs(searchTerm, searchLocation);
 }
@@ -162,13 +163,14 @@ var formSubmitHandler = function(event) {
 
 //search Google for parameters inserted in page
 function searchJobs(searchTerm, searchLocation) {
+  console.log(searchTerm, searchLocation);
   //var searchTerm = jobSearch.value;
   //var searchLocation;
   var searchApi =
     "https://www.googleapis.com/customsearch/v1/siterestrict?key=AIzaSyDN1URsMNvO298DwJn6yW7QN8FC-uaAe-U&cx=261baf09873055c10&cr=us&dateRestrict=d[30]&num=10&sort=date&q=" +
     searchTerm +
     "&hq=";
-  if (jobSearch.value !== "") {
+  if (searchTerm !== "") {
     fetch(searchApi).then(function (response) {
       //if valid response received
       if (response.ok) {
@@ -259,7 +261,7 @@ var buttonHistory = () =>{
       for (i=0; i<searchObjArr.length; i++) {
           var buttonsEl = document.querySelector(".tag-cloud");
           var searchButton = document.createElement("span");
-          searchButton.innerText = searchObjArr[i].searchTerm + " in " + searchObjArr[i].searchLocation;
+          searchButton.innerText = searchObjArr[i].searchTerm + " IN " + searchObjArr[i].searchLocation;
           buttonsEl.appendChild(searchButton);
           searchButton.classList.add("tag-cloud-individual-tag");
           searchButton.addEventListener("click", buttonClickHandler);
