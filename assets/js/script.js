@@ -70,13 +70,11 @@ var saveSearch = function(searchTerm, searchLocation) {
 
   //parse the array in local storage
   var searchObjArr = JSON.parse(localStorage.getItem("searchObjArr")) || [];
-  //console.log(searchObjArr);
-  //console.log({searchTerm, searchLocation});
 
   for (i=0; i<searchObjArr.length; i++) {
     if(searchObjArr[i].searchTerm === searchTerm
       && searchObjArr[i].searchLocation === searchLocation) {
-      //console.log("they're equal");
+
       return
       };
   };
@@ -102,7 +100,7 @@ var makeButton = function(searchTerm, searchLocation) {
   searchButton.innerText = searchTerm + " in " + searchLocation;
   buttonsEl.appendChild(searchButton);
   searchButton.classList.add("tag-cloud-individual-tag");
-  //console.log("make buttons");
+
   //add event listener. Do not call function, just attach it to button
   searchButton.addEventListener("click", buttonClickHandler); 
 }
@@ -124,7 +122,7 @@ var sendButtonToSearchJobs = function(event) {
 // 2 functions - one to get variables from form and the other to get variables from button
 var buttonClickHandler = function(event) {
   var buttonText = event.target.innerText;
-  //console.log(buttonText);//get info from button
+
   //split the text on the button into two variables for search
   buttonTextSplit = buttonText.split(" IN ");
   var searchTerm = buttonTextSplit[0];
@@ -158,7 +156,7 @@ var formSubmitHandler = function(event) {
 
 //search Google for parameters inserted in page
 function searchJobs(searchTerm, searchLocation) {
-  
+
   var searchApi =
     "https://www.googleapis.com/customsearch/v1/siterestrict?key=AIzaSyDN1URsMNvO298DwJn6yW7QN8FC-uaAe-U&cx=261baf09873055c10&cr=us&dateRestrict=d[30]&num=10&sort=date&q=" +
     searchTerm +
@@ -251,7 +249,6 @@ document.querySelector("#go-button").addEventListener("click", formSubmitHandler
 var buttonHistory = () =>{
   if(localStorage.getItem("searchObjArr")) {
       searchObjArr = JSON.parse(localStorage.getItem("searchObjArr"));
-      console.log("this is the array for buttons", searchObjArr);
       for (i=0; i<searchObjArr.length; i++) {
           var buttonsEl = document.querySelector(".tag-cloud");
           var searchButton = document.createElement("span");
@@ -261,7 +258,7 @@ var buttonHistory = () =>{
           searchButton.addEventListener("click", buttonClickHandler);
       } 
   } else {
-      console.log("empty storage");
+    return;
   }
 }
 buttonHistory();
