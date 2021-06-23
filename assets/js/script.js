@@ -1,6 +1,8 @@
 //Global Variables
 //search Google on button click
-document.querySelector("#go-button").addEventListener("click", formSubmitHandler);
+document
+  .querySelector("#go-button")
+  .addEventListener("click", formSubmitHandler);
 
 //example api call to careeronestop
 var headers = {
@@ -17,11 +19,11 @@ var zipSearchContainer = document.querySelector("#zip-search");
 var jobSearchContainer = document.querySelector("#job-listing-container");
 
 var getJobDetails = function (title, location) {
-  document.querySelector("#outlook-container").innerHTML = ""
-  document.querySelector("#growth-container").innerHTML = ""
-  document.querySelector("#description-container").innerHTML = ""
-  document.querySelector("#mediansalary-container").innerHTML = ""
-  document.querySelector("#salaryrange-container").innerHTML = ""
+  document.querySelector("#outlook-container").innerHTML = "";
+  document.querySelector("#growth-container").innerHTML = "";
+  document.querySelector("#description-container").innerHTML = "";
+  document.querySelector("#mediansalary-container").innerHTML = "";
+  document.querySelector("#salaryrange-container").innerHTML = "";
   //variables for job details -  make plural and add url encoding to variables above for this api
   var encodedJobName = encodeURIComponent(title + "s");
 
@@ -58,42 +60,42 @@ var getJobDetails = function (title, location) {
             data.OccupationDetail[0].Wages.StateWagesList[0].Pct90
           ).toLocaleString("en");
       });
-    }
-    else{
-      document.querySelector("#outlook-container").textContent = "No statistics available for this occupation."
+    } else {
+      document.querySelector("#outlook-container").textContent =
+        "To view statistics, please enter a descriptive job title. For example, try 'nurse practitioner' instead of 'nurse'.";
     }
   });
 };
 
 // function to save searches as array of objects in localstorage
-var saveSearch = function(searchTerm, searchLocation) {
-
+var saveSearch = function (searchTerm, searchLocation) {
   //parse the array in local storage
   var searchObjArr = JSON.parse(localStorage.getItem("searchObjArr")) || [];
 
-  for (i=0; i<searchObjArr.length; i++) {
-    if(searchObjArr[i].searchTerm === searchTerm
-      && searchObjArr[i].searchLocation === searchLocation) {
-
-      return
-      };
-  };
+  for (i = 0; i < searchObjArr.length; i++) {
+    if (
+      searchObjArr[i].searchTerm === searchTerm &&
+      searchObjArr[i].searchLocation === searchLocation
+    ) {
+      return;
+    }
+  }
 
   // if the array doesn't have this search, add it and make a button
   searchObjArr.push({
     searchTerm: searchTerm,
-    searchLocation: searchLocation
+    searchLocation: searchLocation,
   });
   // save the array as a string in local storage
   var searchObjArrStringified = JSON.stringify(searchObjArr);
   localStorage.setItem("searchObjArr", searchObjArrStringified);
   // and make a button and append to page
   makeButton(searchTerm, searchLocation);
-  }
+};
 
 //function to make buttons for saved searches
-var makeButton = function(searchTerm, searchLocation) {
-  //target the div to append buttons to 
+var makeButton = function (searchTerm, searchLocation) {
+  //target the div to append buttons to
   var buttonsEl = document.querySelector(".tag-cloud");
   //make city button
   var searchButton = document.createElement("span");
@@ -102,11 +104,11 @@ var makeButton = function(searchTerm, searchLocation) {
   searchButton.classList.add("tag-cloud-individual-tag");
 
   //add event listener. Do not call function, just attach it to button
-  searchButton.addEventListener("click", buttonClickHandler); 
-}
+  searchButton.addEventListener("click", buttonClickHandler);
+};
 
 // function with event parameter to get button info and send to search jobs function
-var sendButtonToSearchJobs = function(event) {
+var sendButtonToSearchJobs = function (event) {
   //get and split text from buttons
   var buttonText = event.target.innerText;
 
@@ -114,13 +116,12 @@ var sendButtonToSearchJobs = function(event) {
   var searchTerm = buttonTextSplit[0];
   var searchLocation = buttonTextSplit[1];
 
-
   //send the variables to the search jobs function
   searchJobs(searchTerm, searchLocation);
-}
+};
 
 // 2 functions - one to get variables from form and the other to get variables from button
-var buttonClickHandler = function(event) {
+var buttonClickHandler = function (event) {
   var buttonText = event.target.innerText;
 
   //split the text on the button into two variables for search
@@ -130,9 +131,9 @@ var buttonClickHandler = function(event) {
   //console.log(searchTerm, searchLocation);
   //send variables as parameters and call searchJobs function
   searchJobs(searchTerm, searchLocation);
-}
+};
 
-var formSubmitHandler = function(event) {
+var formSubmitHandler = function (event) {
   // get value from input element and trim off any spaces
   var searchTerm = jobSearch.value;
   //determine which inputs to use for location variable in searches
@@ -142,27 +143,24 @@ var formSubmitHandler = function(event) {
     zipSearchContainer.value !== ""
   ) {
     searchLocation = zipSearchContainer.value;
-
   } else if (locationSearch.value !== "" && stateSearchContainer.value !== "") {
     searchLocation = locationSearch.value + ", " + stateSearchContainer.value;
-
   } else if (zipSearchContainer.value !== "") {
     searchLocation = zipSearchContainer.value;
-
   } else {
     locationModal();
-  };
+  }
   searchJobs(searchTerm, searchLocation);
-}
+};
 
 //search Google for parameters inserted in page
 function searchJobs(searchTerm, searchLocation) {
   var searchApi =
     "https://www.googleapis.com/customsearch/v1/siterestrict?key=AIzaSyDN1URsMNvO298DwJn6yW7QN8FC-uaAe-U&cx=261baf09873055c10&cr=us&dateRestrict=d[30]&num=10&sort=date&q=" +
     searchTerm +
-    "&hq=" + searchLocation;
+    "&hq=" +
+    searchLocation;
   if (searchTerm !== "") {
-
     fetch(searchApi).then(function (response) {
       //if valid response received
       if (response.ok) {
@@ -230,7 +228,6 @@ function displaySearchResults(arr) {
       .querySelector("#statistics-search-container")
       .classList.remove("hide");
   }
-  
 }
 
 function locationModal() {
@@ -242,23 +239,25 @@ function jobModal() {
 }
 
 //search Google on button click
-document.querySelector("#go-button").addEventListener("click", formSubmitHandler);
-
+document
+  .querySelector("#go-button")
+  .addEventListener("click", formSubmitHandler);
 
 //function to make buttons load on page load
-var buttonHistory = () =>{
-  if(localStorage.getItem("searchObjArr")) {
-      searchObjArr = JSON.parse(localStorage.getItem("searchObjArr"));
-      for (i=0; i<searchObjArr.length; i++) {
-          var buttonsEl = document.querySelector(".tag-cloud");
-          var searchButton = document.createElement("span");
-          searchButton.innerText = searchObjArr[i].searchTerm + " IN " + searchObjArr[i].searchLocation;
-          buttonsEl.appendChild(searchButton);
-          searchButton.classList.add("tag-cloud-individual-tag");
-          searchButton.addEventListener("click", buttonClickHandler);
-      } 
+var buttonHistory = () => {
+  if (localStorage.getItem("searchObjArr")) {
+    searchObjArr = JSON.parse(localStorage.getItem("searchObjArr"));
+    for (i = 0; i < searchObjArr.length; i++) {
+      var buttonsEl = document.querySelector(".tag-cloud");
+      var searchButton = document.createElement("span");
+      searchButton.innerText =
+        searchObjArr[i].searchTerm + " IN " + searchObjArr[i].searchLocation;
+      buttonsEl.appendChild(searchButton);
+      searchButton.classList.add("tag-cloud-individual-tag");
+      searchButton.addEventListener("click", buttonClickHandler);
+    }
   } else {
     return;
   }
-}
+};
 buttonHistory();

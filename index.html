@@ -24,10 +24,9 @@
     <div class="grid-container align-center text-center medium-gray">
       <div class="jumbotron grid-x medium-gray"></div>
       <div>
-        <h2><i class="fas fa-suitcase"></i> Welcome to Jobless!</h2>
+        <h5>Research current job openings and up-to-date career outlook and salary data in one place</h5>
       </div>
         <div>
-       <h5>A job search engine designed to help you take the next step in your career!</h5>
        <!--saved searches buttons-->
       <section class="tag-cloud-section">
         <!--<h5 class="tag-cloud-title">Saved Searches</h5>-->
@@ -42,7 +41,7 @@
           <div class="grid-x grid-margin-x">
             <div class="cell small-12 large-4">
               <label
-                >What are you interested in?
+                >Job title or keywords
                 <input
                   id="job-search"
                   type="text"
@@ -53,7 +52,7 @@
             </div>
             <div class="cell small-6 large-3">
               <label
-                >In what City
+                >City
                 <input
                   id="location-search"
                   type="text"
@@ -121,7 +120,7 @@
             </div>
             <div class="cell small-12 large-3">
               <label
-                > and ZIP Code?
+                > ZIP
                 <input
                   id="zip-search"
                   type="text"
@@ -152,8 +151,8 @@
             class="cell small large-6 text-center hide"
             id="listing-search-container"
           >
-            <h1>Job listings</h1>
-            <p><small>Click title to go directly to job posting!</small></p>
+            <h2>Job listings</h2>
+            <p><small>Click title to view job posting</small></p>
             <br />
             <p id="job-listing-container" class="large-cell-block-y"></p>
           </div>
@@ -161,7 +160,7 @@
             class="cell small large-6 text-center hide large-cell-block-container"
             id="statistics-search-container"
           >
-            <h1>Statistics</h1>
+            <h2>Statistics</h2>
             <br />
             <p id="outlook-container"></p>
             <p id="growth-container"></p>
@@ -172,22 +171,6 @@
         </div>
       </div>
     </div>
-<!-- One possible list for saved searches; however, see the active list in the footer below
-    <div data-closable="fade-out" class="todo-list-card card">
-      <div class="card-divider">
-        <h3>Previous Searches</h3>
-      </div>
-      <div class="card-section">
-        <ul>
-          <li><label for="item1"></label>Item 1</li>
-          <li><input id="item2" type="checkbox"></input><label for="item2"></label>Item 2</li>
-          <li><input id="item3" type="checkbox"></input><label for="item3"></label>Item 3</li>
-          <li><input id="item4" type="checkbox"></input><label for="item4"></label>Item 4</li>
-          <li><input id="item5" type="checkbox"></input><label for="item5"></label>Item 5</li>
-          <li><input id="item6" type="checkbox"></input><label for="item6"></label>Item 6</li>
-        </ul>
-      </div>
-    </div> -->
 
     <footer>
       
@@ -197,7 +180,7 @@
 <!--Modals-->
     <div class="reveal" id="locationModal" data-reveal>
       <h1>Error:</h1>
-      <p class="lead">Please input a valid location.</p>
+      <p class="lead">Please enter a valid location.</p>
       <p>
         Locations can be searched by either City and State, ZIP code, or all
         three.
@@ -209,7 +192,7 @@
 
     <div class="reveal" id="jobModal" data-reveal>
       <h1>Error:</h1>
-      <p class="lead">Please input a valid job title.</p>
+      <p class="lead">Please enter a descriptive job title. </p>
       <button class="close-button" data-close aria-label="Close" type="button">
         <span aria-hidden="true">&times;</span>
       </button>
