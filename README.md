@@ -27,4 +27,4 @@ Search Results
 
 **See Site In Action**
 ---
-[merriammassey.github.io/job-search](https://merriammassey.github.io/job-search/)
+[merriammassey.github.io/jobsearch](https://merriammassey.github.io/jobsearch/)
