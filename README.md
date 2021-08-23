@@ -10,7 +10,7 @@ After searching, the user's previous search history is saved on the device and p
 
 **Future Improvements**
 ---
-In the future, we plan make the app responsive to device size and to integrate a second page that shows the BLS Career Finder tool, which helps users find potential careers that suit their skillsets.  We will also integrate another API through ONet to streamline the way the search engine handles inputs.
+In the future, we plan make the app responsive to device size and to integrate a second page that shows the BLS Career Finder tool, which helps users find potential careers that suit their skillsets.  We will also integrate another API through ONet to streamline the way the search engine handles inputs. Also, this was my first group project leveraging third party APIs. I plan to revise it by implementing what I have learned about modularization and separation of concerns.
 
 **Screenshots**
 ---
